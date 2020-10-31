@@ -15,5 +15,6 @@ public class Patient {
 				paymentForSymptoms += 100;
 			}
 		}
+		
 	}
 }

@@ -43,7 +43,7 @@ public class PatientBinarySearchTree {
 		}		
 	}
 	
-	void printTree() {
+	public void printTree() {
 		search(root);
 	}
 	
@@ -111,11 +111,11 @@ public class PatientBinarySearchTree {
 	
 	
 	public void feverReport() {
-		countFeber(root);
-		System.out.print("cantidad " + fever);
+		countFever(root);
+		System.out.print("Patients with fever: " + fever);
 	}
 	
-	private void countFeber(PatientNode node) {
+	private void countFever(PatientNode node) {
 		
 		if(node == null) {
 			return ;
@@ -130,11 +130,11 @@ public class PatientBinarySearchTree {
 		}
 		
 		if(node.right != null) {
-			countFeber(node.right);
+			countFever(node.right);
 		}
 		
 		if(node.left != null) {
-			countFeber(node.left);
+			countFever(node.left);
 		}
 		
 	}
@@ -195,6 +195,55 @@ public class PatientBinarySearchTree {
 		
 		return totalPatients;
 		
+	}
+	
+	public void commondSymptom() {
+		validate(root);
+	}
+	
+	private void validate(PatientNode node) {
+		if(node == null) {
+			return;
+		}	
+	}
+	
+	public void patientWithBiggetsNumberOfSymptoms() {
+		Patient patient = biggetsNumberOfSymptoms(root);
+		if(patient != null) {
+			System.out.println(patient.name + " is the patient with the biggets number of symptoms");
+		}
+	}
+	
+	private Patient biggetsNumberOfSymptoms(PatientNode node) {
+		if(node == null) {
+			return null;
+		}
+		
+		Patient patientWithMajorSymptomsRight = null;
+		if(node.right != null) {
+			patientWithMajorSymptomsRight = biggetsNumberOfSymptoms(node.right);
+		}
+		
+		Patient patientWithMajorSymptomsLeft = null;
+		if(node.left != null) {
+			patientWithMajorSymptomsLeft = biggetsNumberOfSymptoms(node.left);
+		}
+		
+		Patient sickMajor = node.patient;
+		
+		if(patientWithMajorSymptomsRight != null) {
+			if(sickMajor.symptoms.length <= patientWithMajorSymptomsRight.symptoms.length) {
+				sickMajor = patientWithMajorSymptomsRight;
+			}
+		}
+		
+		if(patientWithMajorSymptomsLeft != null) {
+			if(sickMajor.symptoms.length <= patientWithMajorSymptomsLeft.symptoms.length) {
+				sickMajor = patientWithMajorSymptomsLeft;;
+			}
+		}
+		
+		return sickMajor;
 	}
 
 	
